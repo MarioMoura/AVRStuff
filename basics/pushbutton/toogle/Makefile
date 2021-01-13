@@ -10,7 +10,7 @@ AVRDUDE = avrdude
 OBJCOPY = avr-objcopy
 AVRSIZE = avr-size
 
-TARGET= blink
+TARGET= toogle
 
 CPPFLAGS = -DF_CPU=$(F_CPU) 
 # -DBAUD=$(BAUD)

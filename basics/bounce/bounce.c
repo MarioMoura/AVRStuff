@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define DELAY 300
+#define DELAY 100
 
 int main () __attribute__ ((noreturn));
 

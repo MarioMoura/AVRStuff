@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define DELAY 300
+#define DELAY 30
 #define BLOCK 3 // 1...8
 
 int main(void){
