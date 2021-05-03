@@ -10,9 +10,11 @@ AVRDUDE = avrdude
 OBJCOPY = avr-objcopy
 AVRSIZE = avr-size
 
-TARGET= blink
+TARGET= kc
 
 SOURCES=$(wildcard *.c)
+OBJECTS=$(SOURCES:.c=.o)
+HEADERS=$(SOURCES:.c=.h)
 
 CPPFLAGS = -DF_CPU=$(F_CPU) 
 # -DBAUD=$(BAUD)
@@ -32,10 +34,10 @@ TARGET_ARCH = -mmcu=$(MCU)
 .PHONY: all flash size clean check
 all: $(TARGET).hex
 
-%.o: $(SOURCES) 
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $^
+%.o: %.c 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
 
-%.elf: %.o
+$(TARGET).elf: $(OBJECTS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) -o $@ $^
 
 %.hex: %.elf

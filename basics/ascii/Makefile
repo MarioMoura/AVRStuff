@@ -12,6 +12,8 @@ AVRSIZE = avr-size
 
 TARGET= serialLoopback
 
+SOURCES=$(wildcard *.c)
+
 CPPFLAGS = -DF_CPU=$(F_CPU) 
 # -DBAUD=$(BAUD)
 
@@ -38,6 +40,7 @@ $(TARGET).elf: $(TARGET).o
 
 $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -j .text -j .data -O ihex $< $@
+
 
 
 clean:

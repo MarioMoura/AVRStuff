@@ -2,10 +2,12 @@
 #include<avr/io.h>
 #include<util/delay.h>
 
+#define BUTTON PD4
+
 char clicked(void){
-	if(bit_is_clear(PIND,PD2)){
+	if(bit_is_clear(PIND,BUTTON)){
 		_delay_us(1000);
-		if(bit_is_clear(PIND,PD2)){
+		if(bit_is_clear(PIND,BUTTON)){
 			return 1;
 		}
 	}
@@ -20,7 +22,7 @@ int main(void){
 	PORTB = 0xff;
 
 	DDRD = 0x00;
-	PORTD |= (1 << PD2);
+	PORTD |= (1 << BUTTON);
 
 
 	while(1){

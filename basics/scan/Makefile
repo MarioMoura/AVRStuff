@@ -12,6 +12,8 @@ AVRSIZE = avr-size
 
 TARGET= scan
 
+SOURCES=$(wildcard *.c)
+
 CPPFLAGS = -DF_CPU=$(F_CPU) 
 # -DBAUD=$(BAUD)
 #
@@ -33,13 +35,13 @@ TARGET_ARCH = -mmcu=$(MCU)
 .PHONY: all flash size clean check
 all: $(TARGET).hex
 
-$(TARGET).o: $(TARGET).c 
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<
+%.o: $(SOURCES) 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $^
 
-$(TARGET).elf: $(TARGET).o
+%.elf: %.o
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) -o $@ $^
 
-$(TARGET).hex: $(TARGET).elf
+%.hex: %.elf
 	$(OBJCOPY) -j .text -j .data -O ihex $< $@
 
 
